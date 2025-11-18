@@ -1,6 +1,6 @@
 
 var player = {
-  things: new Decimal(1e10),
+  things: new Decimal(10),
   thingamajigs: [],
   lastUpdate: Date.now()
 }
