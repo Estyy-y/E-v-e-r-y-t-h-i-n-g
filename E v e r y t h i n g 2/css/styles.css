@@ -1,0 +1,62 @@
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  max-width: 950px;
+  margin: 20px auto;
+  padding: 0 12px;
+}
+
+/* Top row layout for currency and quick info */
+.currency-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Producers list: stacked, responsive */
+
+.producers-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+/* Individual generator card — wide enough to read and responsive */
+
+.generator {
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 8px 8px;
+  width: 200px;
+  min-height: 70px;
+  background: #fff;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.generator > * {
+  margin: 0 6px;
+}
+
+.generator-cost {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.thing-currency {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+
+* {
+    font-family: courier;
+  }
