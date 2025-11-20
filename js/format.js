@@ -19,3 +19,7 @@ function format(num) {
     return mantissa + "e" + exponent;
   }
 }
+
+function formatWhole(num) {
+  return num.floor().toString();
+}

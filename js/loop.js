@@ -4,6 +4,8 @@ function gameLoop(that) {
   
   console.log("Things: " + that.player.things.toString())
 
+  that.player.thingsPerSecond = that.player.thingamajigs[0]._totalMultiplier
+
   that.player.thingamajigs[0].multiplier()
   that.player.things = that.player.things.add(that.player.thingamajigs[0]._totalMultiplier.mul(diff))
 

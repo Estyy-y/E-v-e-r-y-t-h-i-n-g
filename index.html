@@ -4,19 +4,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/thingamajigs.css">
   <title>E v e r y t h i n g</title>
 </head>
 <body>
   <div id="app">
-    <div class="currency-container">
-      <div class="thing-currency">
-        You have {{ format(player.things) }} Things
+    <div class="sidebar-menu">
+      <div class="game-title">
+        <h1>E v e r y t h i n g</h1>
       </div>
+      <nav>
+        <ul>
+          <li><a href="#" @click.prevent="activeMenu = 'thingamajig'" :class="{active: activeMenu === 'thingamajig'}">Thingamajigs</a></li>
+          <li><a href="#" @click.prevent="activeMenu = 'options'" :class="{active: activeMenu === 'options'}">Options</a></li>
+          <li><a href="#" @click.prevent="activeMenu = 'stats'" :class="{active: activeMenu === 'stats'}">Statistics</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="producers-container">
-      <div v-for="thingamajig in player.thingamajigs" :key="thingamajig._tier">
-        <thingamajig-component :thingamajig="thingamajig"></thingamajig-component>
-      </div>
+    <div class="main-wrapper">
+      <header class="currency-container">
+        <div class="thing-currency">
+          <span class="small-text">You have<br></span>
+          <span class="thing-text">{{ format(player.things) }} Things</span> 
+          <span class="small-text"><br> {{ format(player.thingsPerSecond) }}/s</span>
+        </div>
+      </header>
+      <main>
+        <div class="content-area">
+          <div v-if="activeMenu === 'thingamajig'">
+            <div class="thingamajig-container">
+              <div v-for="thingamajig in player.thingamajigs" :key="thingamajig._tier">
+                <thingamajig-component :thingamajig="thingamajig"></thingamajig-component>
+              </div>
+            </div>
+          </div>
+          <div v-if="activeMenu === 'options'">
+            <div class="options-menu">
+              <h2>Options</h2>
+              <button @click="saveGame">Save Game</button>
+              <button @click="loadGame">Load Game</button>
+            </div>
+          </div>
+          <div v-if="activeMenu === 'stats'">
+            <div class="stats-menu">
+              <h2>Statistics</h2>
+              <!-- Add stats here -->
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   </div>
 </body>

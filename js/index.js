@@ -1,7 +1,8 @@
 var app = new Vue({
   el: "#app",
   data: {
-    player: player
+    player: player,
+    activeMenu: 'thingamajig'
   },
   methods: {
     format(amount) {
@@ -9,6 +10,19 @@ var app = new Vue({
     },
     gameLoop() {
       gameLoop(this)
+    },
+    saveGame() {
+      localStorage.setItem('gameSave', JSON.stringify(this.player));
+      alert('Game saved!');
+    },
+    loadGame() {
+      const save = localStorage.getItem('gameSave');
+      if (save) {
+        Object.assign(this.player, JSON.parse(save));
+        alert('Game loaded!');
+      } else {
+        alert('No save found.');
+      }
     }
   },
   mounted() {

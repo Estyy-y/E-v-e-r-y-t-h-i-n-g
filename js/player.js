@@ -1,6 +1,7 @@
 
 var player = {
-  things: new Decimal(10),
+  things: new Decimal("10"),
+  thingsPerSecond: new Decimal("0"),
   thingamajigs: [],
   lastUpdate: Date.now()
 }

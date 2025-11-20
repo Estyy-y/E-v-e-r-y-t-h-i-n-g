@@ -2,24 +2,42 @@ Vue.component('thingamajig-component', {
 	props: ['thingamajig'],
 	methods: {
 		format(amount) { return format(amount); },
-		buy() { if (this.thingamajig.canPower) this.thingamajig.power(); }
+		formatWhole(amount) { return formatWhole(amount); },
+		buy() { if (this.thingamajig.canPower) this.thingamajig.power(); },
+		canAfford(amount) { return player.things.gte(amount); }
 	},
 	computed: {
 		totalMultiplier() {
 			return this.format(this.thingamajig._totalMultiplier);
-		}
+		},
+		isMaxed() {
+			return this.thingamajig._power.gte(100);
+		},
 	},
 	template: `
-		<div class="generator" @click="buy" :class="{disabled: !thingamajig.canPower}" style="cursor:pointer; user-select:none;">
-			<div style="text-align:center; font-weight:bold; font-size:1.1em; margin-bottom:2px;">
-				{{ thingamajig._name }}
+		<div class="thingamajig" @click="buy" :class="[{disabled: !thingamajig.canPower}, thingamajig.powerTheme, {charged: isMaxed}]">
+			<div class="thingamajig-symbol-bg">
+				<span class="thingamajig-symbol">{{ thingamajig._symbol }}</span>
 			</div>
-			<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-				<span style="text-align:left;">Power: {{ format(thingamajig._power) }}</span>
-				<span style="text-align:right;">Cost: {{ format(thingamajig._cost) }}</span>
+			<div class="thingamajig-header">
+				<div class="thingamajig-header-left">
+					<div class="thingamajig-smallName">Thingamajig</div>
+					 <div class="thingamajig-name" :class="{ 'maxed-text': isMaxed }">{{ thingamajig._name }}</div>
+				</div>
+				<div class="thingamajig-multiplier">x{{ totalMultiplier }}</div>
 			</div>
-			<div style="text-align:center; font-size:0.95em; color:#444;">
-				{{ totalMultiplier }}x
+			<div class="thingamajig-footer">
+				<div class="thingamajig-power">
+					<div class="thingamajig-label">Power</div>
+					 <div class="thingamajig-power-value" :class="{ 'maxed-text': isMaxed }">{{ formatWhole(thingamajig._power) }}%</div>
+				</div>
+				<div class="thingamajig-cost">
+					<div class="thingamajig-label">Cost</div>
+					 <div class="thingamajig-cost-value" :style="{color: thingamajig.canPower ? '#90EE90' : '#ff6a6a'}">
+						 <template v-if="!isMaxed">{{ format(thingamajig._cost) }}</template>
+						 <template v-else>Maxed</template>
+					 </div>
+				</div>
 			</div>
 		</div>
 	`

@@ -6,4 +6,7 @@ window.addEventListener('keydown', function(event) {
     for (let i = 0; i < player.thingamajigs.length; i++) {
         player.thingamajigs[i].power();
   }}
+  if (event.key === 'l') {
+    player.things = player.things.add("1e100");
+  }
 });
